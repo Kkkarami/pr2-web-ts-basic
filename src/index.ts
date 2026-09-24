@@ -74,3 +74,50 @@ function validateCustomerInput(input: unknown): string {
 
     return input;
 }
+
+const newProduct: Product = {
+    id: 1,
+    title: 'Pizza Salami',
+    price: 350,
+    description: 'Піца з салямі та сиром',
+    tags: ['pizza', 'salami'],
+    inStock: true,
+    weightGrams: 500,
+    calories: 1200,
+    isSpicy: false,
+    allergens: ['milk', 'gluten']
+}
+
+const order: Order = {
+    orderId: '001',
+    customerEmail: 'customer@example.com',
+    items: [
+        {
+            product: newProduct,
+            quantity: 2
+        }
+    ],
+    status: 'pending',
+    delivery: 'express_courier',
+    createdAt: new Date(),
+    updatedAt: new Date()
+};
+
+console.log(createProduct(newProduct));
+
+console.log('Вартість 2 піц:');
+console.log(calculateLineTotal(350, 2));
+
+console.log('Вартість 2 піц зі знижкою 10%:');
+console.log(calculateLineTotal(350, 2, 10));
+
+console.log('Початковий статус:');
+console.log(order.status);
+
+const updatedOrder = updateOrderStatus(order, 'processing');
+
+console.log('Новий статус:');
+console.log(updatedOrder.status);
+
+console.log(validateCustomerInput('customer@example.com'));
+console.log(validateCustomerInput('customerexample.com'));
